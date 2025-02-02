@@ -1,0 +1,99 @@
+.message-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Message Item */
+.message {
+    padding: 12px 15px;
+    border-radius: 12px;
+    max-width: 75%;
+    font-size: 14px;
+    line-height: 1.4;
+    word-wrap: break-word;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Incoming Messages */
+.incoming {
+    background-color: #ffffff;
+    align-self: flex-start;
+    border: 1px solid #ddd;
+}
+
+/* Outgoing Messages */
+.outgoing {
+    background-color: #dcf8c6;
+    align-self: flex-end;
+    text-align: right;
+}
+
+/* Text Messages */
+.message-text {
+    margin: 5px 0;
+}
+
+/* Timestamp */
+.timestamp {
+    font-size: 0.75rem;
+    color: #666;
+    align-self: flex-end;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+/* Date Separator */
+.date-separator {
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    color: #ffffff;
+    margin: 10px 0;
+    padding: 5px;
+    background: #333;
+    border-radius: 12px;
+    width: fit-content;
+    align-self: center;
+}
+
+/* Icons */
+.message-icon {
+    font-size: 1.2rem;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+/* Image Messages */
+.message-image img {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.message-image img:hover {
+    transform: scale(1.05);
+}
+
+/* Audio Messages */
+.message-audio audio {
+    width: 100%;
+}
+
+/* Video Messages */
+.message-video video {
+    width: 100%;
+}
+
+/* Document Messages */
+.message-document a {
+    text-decoration: none;
+    font-weight: bold;
+}

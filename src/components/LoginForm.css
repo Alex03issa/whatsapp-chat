@@ -1,0 +1,67 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f2f5;
+  text-align: center;
+}
+
+.login-box {
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items */
+}
+
+.login-box h2 {
+  font-size: 22px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.login-box input {
+  width: 90%; /* Make input take up most of the width */
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  background: #ffffff;
+  outline: none;
+  text-align: center; /* Center text inside input */
+}
+
+.login-box input:focus {
+  border-color: #25D366;
+  box-shadow: 0 0 5px rgba(37, 211, 102, 0.5);
+}
+
+.login-btn {
+  width: 90%; /* Center button and make it the same width as input */
+  padding: 12px;
+  background-color: #25D366;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.login-btn:hover {
+  background-color: #1ebe57;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 10px;
+}

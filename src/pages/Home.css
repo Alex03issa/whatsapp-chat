@@ -1,0 +1,320 @@
+/* Main container */
+.home-container {
+    display: flex;
+    height: 100vh;
+    background-color: #eae6df;
+    overflow: hidden;
+}
+
+/* Sidebar (Chats List) */
+.sidebar {
+    width: 30%;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #ccc;
+    overflow-y: auto;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Header (Chats Title & Settings) */
+.chat-header {
+    background: #f0f2f5;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+}
+
+/* Search Bar */
+.search-bar {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    background: #f0f2f5;
+    border-bottom: 1px solid #ccc;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    font-size: 14px;
+    background: white;
+    color: #333;
+}
+
+.search-bar input::placeholder {
+    color: #777;
+}
+
+/* Chat List */
+.chat-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+    overflow-y: auto;
+    background: white;
+}
+
+.chat-list li {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.chat-list li:hover {
+    background: #f5f5f5;
+}
+
+.selected-chat {
+    background: #dcf8c6;
+}
+
+.chat-preview {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e5ddd5;
+    overflow-y: hidden;
+}
+
+
+/* No Chat Selected Message */
+.no-chat-selected {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    color: #555;
+    font-size: 18px;
+}
+
+/* Settings Menu */
+.settings-menu {
+    position: relative;
+    display: inline-block;
+}
+
+.settings-dropdown {
+    position: absolute;
+    top: 45px;
+    right: 0;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 180px;
+    animation: fadeIn 0.2s ease-in-out;
+    z-index: 1000;
+}
+
+/* Dropdown Buttons */
+.settings-dropdown button {
+    background: none;
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 100%;
+    text-align: left;
+    color: #333;
+    border-radius: 8px;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Hover Effect */
+.settings-dropdown button:hover {
+    background: #8feeae;
+    color: white;
+}
+
+
+/* Global Scrollbar */
+*::-webkit-scrollbar {
+    width: 4px !important;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: #696969 !important;
+    border-radius: 5px !important;
+    min-height: 25px !important;
+    transition: all 0.2s ease-in-out;
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: #555 !important;
+}
+
+.header-icons {
+    display: flex;
+    gap: 10px;
+}
+
+
+/* Chat Avatar */
+.chat-avatar img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 12px;
+}
+
+/* Chat Info */
+.chat-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.chat-name {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    width: 350px;
+    max-width: 90%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content h2 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.modal-content input {
+    width: 98%;
+    height: 40px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    transition: border 0.3s, box-shadow 0.3s;
+    display: block;
+    color: #333;
+    cursor: text; 
+    padding-left: 8px;
+}
+
+.modal-content input::placeholder {
+    color: #999;
+    font-size: 14px;
+    font-style: italic;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.modal-content input:focus::placeholder {
+    opacity: 0.6;
+}
+
+.modal-content input:focus {
+    border-color: #25D366;
+    box-shadow: 0 0 5px rgba(37, 211, 102, 0.5);
+}
+
+.modal-content input:focus {
+    cursor: text !important;
+}
+
+
+.modal-actions {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+}
+
+.modal-start {
+    padding: 12px;
+    width: 101%;  
+    background-color: #25D366;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.modal-start:hover {
+    background-color: #1ebe57;
+}
+
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Container for the header icons */
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* General Button Style */
+.header-icons button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #72848f;
+    transition: color 0.3s ease;
+}
+
+
+.header-icons button:hover {
+    color: #494949; 
+}
