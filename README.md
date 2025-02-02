@@ -24,17 +24,21 @@
 ![Интерфейс чата](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat0.png)
 
 ### 🔹 Создание нового чата
-![Создание чата](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat1.png)
+![Создание чата](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat5.png)
+
+
 
 - **Отправка сообщений:** пользователи могут отправлять текстовые сообщения на указанный номер WhatsApp.
 
-### 🔹 Отправка сообщений
-![Отправка сообщений](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat8.png)
+### 🔹 Отправка сообщений!
+[Получение сообщения](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat8.png)
 
 - **Получение сообщений:** Входящие сообщения извлекаются с помощью метода опроса HTTP API.
 
 ### 🔹 Получение сообщения
-![Получение сообщения](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat3.jpg)
+
+![Создание чата](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat1.png)
+
 
 - **Удаление уведомлений:** После обработки сообщения уведомления удаляются, чтобы позволить приходить новым.
 
@@ -44,7 +48,7 @@
 ![Контактная информация](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat4.jpg)
 
 ### 🔹 Типы сообщений (текст, изображения, аудио)
-![Типы сообщений](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat5.png)
+![Типы сообщений](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat3.jpg)
 
 ## Используемые технологии
 
