@@ -187,7 +187,7 @@ http://localhost:3000
   
   ![CMD](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat10.png)
   
-  ![Webhook](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat9.png)
+  ![Webhook](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat9.jpg)
   
 ### HTTP API Polling (используется в этом проекте)
 
