@@ -1,203 +1,195 @@
 # WhatsApp Chat App
 
-## Overview
+![Интерфейс чата](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat0.png)
 
-This is a React-based web application that allows users to send and receive WhatsApp messages using the **GREEN-API**. The application mimics the interface of **WhatsApp Web** and enables real-time communication through HTTP polling.
+## Обзор
 
-## Features
+Это веб-приложение на основе React, которое позволяет пользователям отправлять и получать сообщения WhatsApp с помощью **GREEN-API**. Приложение имитирует интерфейс **WhatsApp Web** и обеспечивает общение в реальном времени с помощью HTTP-опроса.
 
-- **User Authentication:** Users enter their **idInstance** and **apiTokenInstance** from GREEN-API to access the app.
-### 🔹 Login with Instances
-![Login](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/assets/whatsapp_chat6.png)
+## Функции
 
-![Login](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/assets/whatsapp_chat7.png)
+- **Аутентификация пользователя:** пользователи вводят свои **idInstance** и **apiTokenInstance** из GREEN-API для доступа к приложению.
 
-### 🔹 Logout
-![Logout](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/assets/whatsapp_chat2.jpg)
+### 🔹 Вход с помощью экземпляров
+![Вход](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat6.png)
 
+![Вход](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat7.png)
 
-- **Chat Interface:** UI similar to WhatsApp Web, listing active conversations and displaying message history.
+### 🔹 Выход
+![Выход](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat2.jpg)
 
-### 🔹 Chat Interface
-![Chat Interface](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/assets/whatsapp_chat0.png)
+- **Интерфейс чата:** пользовательский интерфейс, похожий на WhatsApp Web, с перечислением активных разговоров и отображением истории сообщений.
 
-### 🔹 Creating a New Chat
-![Creating a Chat](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/assets/whatsapp_chat1.png)
+### 🔹 Интерфейс чата
+![Интерфейс чата](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat0.png)
 
+### 🔹 Создание нового чата
+![Создание чата](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat1.png)
 
+- **Отправка сообщений:** пользователи могут отправлять текстовые сообщения на указанный номер WhatsApp.
 
-- **Send Messages:** Users can send text messages to a specified WhatsApp number.
+### 🔹 Отправка сообщений
+![Отправка сообщений](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat8.png)
 
-### 🔹 Sending Messages
-![Sending Messages](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/assets/whatsapp_chat8.png)
+- **Получение сообщений:** Входящие сообщения извлекаются с помощью метода опроса HTTP API.
 
-- **Receive Messages:** Incoming messages are retrieved using the HTTP API polling method.
+### 🔹 Получение сообщения
+![Получение сообщения](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat3.jpg)
 
-### 🔹 Receiving a Message
-![Receiving a Message](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/assets/whatsapp_chat3.jpg)
+- **Удаление уведомлений:** После обработки сообщения уведомления удаляются, чтобы позволить приходить новым.
 
-- **Delete Notifications:** After processing a message, notifications are deleted to allow new ones to arrive.
+- **Извлечение контактной информации:** Извлекает **имя чата** и **аватар** вместо отображения только идентификаторов чата.
 
-- **Contact Info Fetching:** Retrieves the **chat name** and **avatar** instead of displaying only chat IDs.
+### 🔹 Отображение контактной информации
+![Контактная информация](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat4.jpg)
 
-### 🔹 Contact Info Display
-![Contact Info](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/assets/whatsapp_chat4.jpg)
+### 🔹 Типы сообщений (текст, изображения, аудио)
+![Типы сообщений](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat5.png)
 
-### 🔹 Message Types (Text, Images, Audio)
-![Message Types](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/assets/whatsapp_chat5.png)
-
-
-## Technologies Used
+## Используемые технологии
 
 - **React.js** (Frontend)
-- **Node.js & Express** (Backend for API calls)
-- **CSS** (Styling)
-- **GREEN-API** (WhatsApp API service)
+- **Node.js и Express** (Backend для вызовов API)
+- **CSS** (Стилизация)
+- **GREEN-API** (служба API WhatsApp)
 
-## Project Structure
+## Структура проекта
 
 ```
 whatsapp-chat/
-│── public/              # Static assets (images, icons)
+│── public/ # Статические ресурсы (изображения, иконки)
 │── src/
-│   ├── components/      # UI components
-│   │   ├── ChatWindow.js
-│   │   ├── ChatWindow.css
-│   │   ├── MessageList.js
-│   │   ├── MessageList.css
-│   │   ├── MessageInput.js
-│   │   ├── MessageInput.css
-│   │   ├── LoginForm.js
-│   │   ├── LoginForm.css
-│   ├── pages/           # Main application pages
-│   │   ├── Home.js
-│   │   ├── Home.css
-│   │   ├── Login.js
-│   ├── services/        # API service functions
-│   │   ├── api.js
-│   ├── App.js           # Main React component
-│   ├── index.js         # Entry point
-│   ├── index.css        # Global styles
-│── server.js            # Backend server for API proxy
-│── package.json         # Dependencies and scripts
-│── README.md            # Project documentation
+│ ├── components/ # Компоненты пользовательского интерфейса
+│ │ ├── ChatWindow.js
+│ │ ├── ChatWindow.css
+│ │ ├── MessageList.js
+│ │ ├── MessageList.css
+│ │ ├── MessageInput.js
+│ │ ├── MessageInput.css
+│ │ ├── LoginForm.js
+│ │ ├── LoginForm.css
+│ ├── pages/ # Главные страницы приложения
+│ │ ├── Home.js
+│ │ ├── Home.css
+│ │ ├── Login.js
+│ ├── services/ # Функции сервиса API
+│ │ ├── api.js
+│ ├── App.js # Главный компонент React
+│ ├── index.js # Точка входа
+│ ├── index.css # Глобальные стили
+│── server.js # Внутренний сервер для прокси API
+│── package.json # Зависимости и скрипты
+│── README.md # Документация проекта
 ```
 
-## Setup & Installation
+## Настройка и установка
 
-### Prerequisites
+### Предварительные условия
 
-- **Node.js** (v14+ recommended)
-- **npm or yarn**
-- **GREEN-API Account**
+- **Node.js** (рекомендуется v14+)
+- **npm или yarn**
+- **Учетная запись GREEN-API**
 
-### Steps to Run the Project
+### Шаги для запуска проекта
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-repo/whatsapp-chat.git
-   cd whatsapp-chat
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the development server:
-   ```bash
-   npm start
-   ```
-4. Open the application in a browser at:
-   ```
-   http://localhost:3000
-   ```
-5. Log in using your GREEN-API **idInstance** and **apiTokenInstance**.
-6. Start a new chat by entering a WhatsApp number.
-7. Send and receive messages in real-time.
+1. Клонируйте репозиторий:
+```bash
+git clone https://github.com/your-repo/whatsapp-chat.git
+cd whatsapp-chat
+```
+2. Установите зависимости:
+```bash
+npm install
+```
+3. Запустите сервер разработки:
+```bash
+npm start
+```
+4. Откройте приложение в браузере по адресу:
+```
+http://localhost:3000
+```
+5. Войдите, используя **idInstance** и **apiTokenInstance** GREEN-API.
 
-## API Integration
+6. Начните новый чат, введя номер WhatsApp.
 
-### Sending Messages
+7. Отправляйте и получайте сообщения в режиме реального времени.
 
-Uses `https://api.green-api.com/waInstance{idInstance}/SendMessage/{apiTokenInstance}`
+## Интеграция API
 
-- Implemented in `sendMessage()` inside `api.js`
-- Sends a message to a specified WhatsApp number.
+### Отправка сообщений
 
-### Receiving Messages (Using HTTP API Polling)
+Использует `https://api.green-api.com/waInstance{idInstance}/SendMessage/{apiTokenInstance}`
 
-Uses `https://api.green-api.com/waInstance{idInstance}/ReceiveNotification/{apiTokenInstance}`
+- Реализовано в `sendMessage()` внутри `api.js`
+- Отправляет сообщение на указанный номер WhatsApp.
 
-- Implemented in `receiveMessages()` inside `api.js`
-- Uses HTTP polling to check for new messages.
-- Retrieves notifications and filters messages only for active chats.
-- Processes messages and deletes notifications after retrieval using `deleteNotification()`.
 
-### Deleting Notifications
+### Получение сообщений (используя HTTP API)
 
-Uses `https://api.green-api.com/waInstance{idInstance}/DeleteNotification/{receiptId}/{apiTokenInstance}`
+Использует `https://api.green-api.com/waInstance{idInstance}/ReceiveNotification/{apiTokenInstance}`
 
-- Implemented in `deleteNotification()` inside `api.js`
-- Ensures only new messages are fetched by removing processed notifications.
+- Реализовано в `receiveMessages()` внутри `api.js`
+- Использует HTTP для проверки новых сообщений.
+- Получает уведомления и фильтрует сообщения только для активных чатов.
+- Обрабатывает сообщения и удаляет уведомления после извлечения с помощью `deleteNotification()`.
 
-### Fetching Chat History
+### Удаление уведомлений
 
-Uses `https://api.green-api.com/waInstance{idInstance}/getChatHistory/{apiTokenInstance}`
+Использует `https://api.green-api.com/waInstance{idInstance}/DeleteNotification/{receiptId}/{apiTokenInstance}`
 
-- Implemented in `getChatHistory()` inside `api.js`
-- Retrieves past messages for a chat.
+- Реализовано в `deleteNotification()` внутри `api.js`
+- Обеспечивает извлечение только новых сообщений путем удаления обработанных уведомлений.
 
-### Fetching Chat List
+### Извлечение истории чата
 
-Uses `https://api.green-api.com/waInstance{idInstance}/getChats/{apiTokenInstance}`
+Использует `https://api.green-api.com/waInstance{idInstance}/getChatHistory/{apiTokenInstance}`
 
-- Implemented in `getChats()` inside `api.js`
-- Lists all active conversations.
+- Реализовано в `getChatHistory()` внутри `api.js`
+- Извлекает прошлые сообщения для чата.
 
-### Fetching Contact Info
+### Извлечение списка чатов
 
-Uses `https://api.green-api.com/waInstance{idInstance}/getContactInfo/{apiTokenInstance}`
+Использует `https://api.green-api.com/waInstance{idInstance}/getChats/{apiTokenInstance}`
 
-- Implemented in `getContactInfo()` inside `api.js`
-- Retrieves **chat name** and **avatar** for a given chat ID.
+- Реализовано в `getChats()` внутри `api.js`
+- Перечисляет все активные разговоры.
 
-### Fetching Instance State
+### Извлечение контактной информации
 
-Uses `https://api.green-api.com/waInstance{idInstance}/getStateInstance/{apiTokenInstance}`
+Использует `https://api.green-api.com/waInstance{idInstance}/getContactInfo/{apiTokenInstance}`
 
-- Implemented in `getInstanceState()` inside `api.js`
-- Checks the connection status of the WhatsApp instance.
+- Реализовано в `getContactInfo()` внутри `api.js`
+- Извлекает **имя чата** и **аватар** для заданного идентификатора чата.
 
-## Webhook vs HTTP API Polling
+### Извлечение состояния экземпляра
 
-### Webhook (Not Used)
+Использует `https://api.green-api.com/waInstance{idInstance}/getStateInstance/{apiTokenInstance}`
 
-- Listens for new messages **automatically**.
-- Requires a **server running 24/7** to handle incoming data.
-- More **efficient** but needs additional setup.
+- Реализовано в `getInstanceState()` внутри `api.js`
+- Проверяет состояние подключения экземпляра WhatsApp.
 
-### HTTP API Polling (Used in this project)
+## Webhook против HTTP API Polling
 
-- Periodically **requests** new messages.
-- Runs in the **browser** without needing a server.
-- Simpler but requires **manual polling**.
+### Webhook (не используется но есть в коде как комментарии в chatwindow.js) 
 
-## Issues & Debugging
+- Прослушивает новые сообщения **автоматически**.
+- Требует **сервера, работающего 24/7**, для обработки входящих данных.
+- Более **эффективно**, но требует дополнительной настройки.
 
-- If messages are not received, ensure **GREEN-API credentials** are valid.
-- If the app does not display messages, check **API response format**.
-- Ensure the correct **instance ID and token** are used for API calls.
+### HTTP API Polling (используется в этом проекте)
 
-## Future Improvements
+- Периодически **запрашивает** новые сообщения.
+- Работает в **браузере** без необходимости в сервере.
+- Проще, но требует **ручного опроса**.
 
-- Implement **WebSockets** for real-time updates instead of polling.
-- Support for **media messages (images, videos, documents)**.
-- Optimize **performance** for better efficiency.
+## Проблемы и отладка
 
-## Author
+- Если сообщения не получены, убедитесь, что **GREEN-API credentials** действительны.
+- Если приложение не отображает сообщения, проверьте **формат ответа API**.
+- Убедитесь, что для вызовов API используются правильные **идентификатор экземпляра и токен**.
+
+## Автор
 
 - **Alwxander Issa**
-- Email: **[alexander.issa@gmail.com](mailto\:alexander.issa@gmail.com)**
-
-
-
-
+- Электронная почта: **[alexander.issa@gmail.com](mailto\:alexander.issa@gmail.com)**
