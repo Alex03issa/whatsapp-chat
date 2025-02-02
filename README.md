@@ -8,43 +8,43 @@ This is a React-based web application that allows users to send and receive What
 
 - **User Authentication:** Users enter their **idInstance** and **apiTokenInstance** from GREEN-API to access the app.
 ### 🔹 Login with Instances
-![Login](/assets/whatsapp_chat6.png)
+![Login](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/assets/whatsapp_chat6.png)
 
-![Login](/assets/whatsapp_chat7.png)
+![Login](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/assets/whatsapp_chat7.png)
 
 ### 🔹 Logout
-![Logout](/assets/whatsapp_chat2.jpg)
+![Logout](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/assets/whatsapp_chat2.jpg)
 
 
 - **Chat Interface:** UI similar to WhatsApp Web, listing active conversations and displaying message history.
 
 ### 🔹 Chat Interface
-![Chat Interface](/assets/whatsapp_chat0.png)
+![Chat Interface](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/assets/whatsapp_chat0.png)
 
 ### 🔹 Creating a New Chat
-![Creating a Chat](/assets/whatsapp_chat1.png)
+![Creating a Chat](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/assets/whatsapp_chat1.png)
 
 
 
 - **Send Messages:** Users can send text messages to a specified WhatsApp number.
 
 ### 🔹 Sending Messages
-![Sending Messages](/assets/whatsapp_chat8.png)
+![Sending Messages](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/assets/whatsapp_chat8.png)
 
 - **Receive Messages:** Incoming messages are retrieved using the HTTP API polling method.
 
 ### 🔹 Receiving a Message
-![Receiving a Message](/assets/whatsapp_chat3.jpg)
+![Receiving a Message](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/assets/whatsapp_chat3.jpg)
 
 - **Delete Notifications:** After processing a message, notifications are deleted to allow new ones to arrive.
 
 - **Contact Info Fetching:** Retrieves the **chat name** and **avatar** instead of displaying only chat IDs.
 
 ### 🔹 Contact Info Display
-![Contact Info](/assets/whatsapp_chat4.jpg)
+![Contact Info](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/assets/whatsapp_chat4.jpg)
 
 ### 🔹 Message Types (Text, Images, Audio)
-![Message Types](/assets/whatsapp_chat5.png)
+![Message Types](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/assets/whatsapp_chat5.png)
 
 
 ## Technologies Used
