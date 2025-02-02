@@ -3,10 +3,9 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    background: url("H:\ReactProjects\whatsapp-chat\src\assests\whatsapp-bg-lgt.jpg") center/cover;
     overflow-y: hidden;
 }
-
+public\assests\whatsapp-bg-lgt.jpg
 .chat-header {
     background: #f0f2f5;
     color: white;

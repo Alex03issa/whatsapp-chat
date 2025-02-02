@@ -20,6 +20,7 @@ const ChatWindow = ({ chat, credentials }) => {
 
     const messageListRef = useRef(null);
     const messageIds = useRef(new Set()); // Prevent duplicate messages
+    const bgImage = "/assets/whatsapp-bg-lgt.jpg";
 
     useEffect(() => {
         if (credentials?.idInstance && credentials?.apiTokenInstance && chat) {
@@ -216,7 +217,10 @@ const ChatWindow = ({ chat, credentials }) => {
     };
 
     return (
-        <div className="chat-window">
+        <div 
+            className="chat-window" 
+            style={{ background: `url(${bgImage}) center/cover no-repeat` }}
+        >
             <div className="chat-header">
                 <div className="chat-avatar">
                     <img 
