@@ -318,3 +318,30 @@
 .header-icons button:hover {
     color: #494949; 
 }
+
+/* Last message preview and unread counter in the chat list */
+.chat-info {
+    min-width: 0;
+    flex: 1;
+}
+
+.chat-last-message {
+    display: block;
+    font-size: 13px;
+    color: #667781;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.unread-badge {
+    margin-left: 8px;
+    min-width: 20px;
+    padding: 2px 6px;
+    border-radius: 10px;
+    background: #25d366;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+}

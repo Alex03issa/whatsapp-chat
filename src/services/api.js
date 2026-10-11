@@ -20,7 +20,6 @@ export const getChats = async (idInstance, apiTokenInstance) => {
             `${BASE_URL}/waInstance${idInstance}/getChats/${apiTokenInstance}`,
             { headers: { "Content-Type": "application/json" } }
         );
-        console.log("API Response:", response.data);
         return response.data;
     } catch (error) {
         console.error("Error fetching chats:", error.response ? error.response.data : error.message);
@@ -110,7 +109,7 @@ export const getChatHistory = async (idInstance, apiTokenInstance, chatId, count
 
 
 export const getContactInfo = async (idInstance, apiTokenInstance, chatId) => {
-    const response = await fetch(`https://api.green-api.com/waInstance${idInstance}/getContactInfo/${apiTokenInstance}`, {
+    const response = await fetch(`${BASE_URL}/waInstance${idInstance}/getContactInfo/${apiTokenInstance}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -127,50 +126,25 @@ export const getContactInfo = async (idInstance, apiTokenInstance, chatId) => {
 };
 
 
-export const receiveMessages = async (idInstance, apiTokenInstance) => {
-    try {
-        const response = await fetch(
-            `https://api.green-api.com/waInstance${idInstance}/ReceiveNotification/${apiTokenInstance}`,
-            {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            }
-        );
-
-        const textResponse = await response.text(); 
-        console.log("🔍 Raw API Response:", textResponse);
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const jsonResponse = JSON.parse(textResponse); 
-        return jsonResponse;
-    } catch (error) {
-        console.error("Error in receiveMessages:", error);
-        return [];
-    }
+/**
+ * Take the next notification from the GREEN-API queue.
+ * Returns null when the queue is empty. Throws on network / HTTP errors.
+ */
+export const receiveNotification = async (idInstance, apiTokenInstance, signal) => {
+    const response = await axios.get(
+        `${BASE_URL}/waInstance${idInstance}/ReceiveNotification/${apiTokenInstance}`,
+        { signal }
+    );
+    return response.data || null;
 };
 
-
-export const deleteNotification = async (idInstance, apiTokenInstance, receiptId) => {
-    try {
-        const response = await fetch(
-            `https://api.green-api.com/waInstance${idInstance}/DeleteNotification/${apiTokenInstance}/${receiptId}`,
-            {
-                method: "DELETE",
-                headers: { "Content-Type": "application/json" }
-            }
-        );
-
-        if (!response.ok) {
-            throw new Error("Failed to delete notification");
-        }
-
-        console.log("Successfully deleted notification:", receiptId);
-    } catch (error) {
-        console.error("Error deleting notification:", error);
-    }
+/**
+ * Remove a processed notification from the queue so the next one can be received.
+ */
+export const deleteNotification = async (idInstance, apiTokenInstance, receiptId, signal) => {
+    const response = await axios.delete(
+        `${BASE_URL}/waInstance${idInstance}/DeleteNotification/${apiTokenInstance}/${receiptId}`,
+        { signal }
+    );
+    return response.data?.result === true;
 };
