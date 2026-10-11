@@ -18,12 +18,8 @@ const LoginForm = ({ onLogin }) => {
         }
 
         try {
-            console.log("Checking credentials...");
-            
             // Verify if instance is authorized
             const instanceState = await getInstanceState(idInstance, apiTokenInstance);
-            
-            console.log("Instance State Response:", instanceState);
 
             // Check if the API response is valid
             if (!instanceState) {
@@ -41,7 +37,7 @@ const LoginForm = ({ onLogin }) => {
                 return;
             }
 
-            // Save credentials and redirect to Home
+            // Save credentials (kept in this browser's localStorage) and redirect to Home
             const newCredentials = { idInstance, apiTokenInstance };
             localStorage.setItem("credentials", JSON.stringify(newCredentials));
             

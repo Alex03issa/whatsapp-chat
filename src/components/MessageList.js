@@ -1,6 +1,6 @@
 import React from "react";
 import "./MessageList.css";
-import { FaFileAlt, FaMicrophone, FaPlayCircle, FaRegImage, FaVideo } from "react-icons/fa";
+import { FaFileAlt, FaMicrophone, FaPlayCircle, FaRegImage } from "react-icons/fa";
 
 const MessageList = ({ messages, credentials }) => {
     const sortedMessages = [...messages].sort((a, b) => a.timestamp - b.timestamp);
