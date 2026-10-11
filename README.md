@@ -1,207 +1,110 @@
-# WhatsApp Chat App
+# WhatsApp Chat
 
-![Интерфейс чата](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat0.png)
+[Русская версия](README.ru.md)
 
-## Обзор
+A WhatsApp Web style chat client built with React on top of [GREEN-API](https://green-api.com/). Log in with a GREEN-API instance, see your chats, read the history, send text messages and receive new messages live.
 
-Это веб-приложение на основе React, которое позволяет пользователям отправлять и получать сообщения WhatsApp с помощью **GREEN-API**. Приложение имитирует интерфейс **WhatsApp Web** и обеспечивает общение в реальном времени с помощью HTTP-опроса.
+![Chat interface](docs/screenshots/whatsapp_chat0.png)
 
-## Функции
+## Features
 
-- **Аутентификация пользователя:** пользователи вводят свои **idInstance** и **apiTokenInstance** из GREEN-API для доступа к приложению.
+- **Login with a GREEN-API instance**: enter `idInstance` and `apiTokenInstance`; the app checks that the instance is authorized.
+- **Chat list** with search, last-message preview and unread counters. Chats that receive a message move to the top, and new chats appear automatically.
+- **Chat window** with contact name and avatar, message history (scroll up to load older messages), date separators and text, image, audio, video and document messages.
+- **Send messages** to an existing chat or start a new chat with a phone number.
+- **Live updates**: one notification loop for the whole app (HTTP polling of `ReceiveNotification`), or an optional webhook relay pushing notifications over socket.io.
 
-### 🔹 Вход с помощью экземпляров
-![Вход](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat6.png)
+| Login | New chat | Receiving a message |
+|-------|----------|---------------------|
+| ![Login](docs/screenshots/whatsapp_chat7.png) | ![New chat](docs/screenshots/whatsapp_chat5.png) | ![Incoming message](docs/screenshots/whatsapp_chat1.png) |
 
-![Вход](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat7.png)
+| Contact info | Message types | Logout |
+|--------------|---------------|--------|
+| ![Contact info](docs/screenshots/whatsapp_chat4.jpg) | ![Message types](docs/screenshots/whatsapp_chat3.jpg) | ![Logout](docs/screenshots/whatsapp_chat2.jpg) |
 
-### 🔹 Выход
-![Выход](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat2.jpg)
+## Tech stack
 
-- **Интерфейс чата:** пользовательский интерфейс, похожий на WhatsApp Web, с перечислением активных разговоров и отображением истории сообщений.
+- React 19 (Create React App), React Router 7, axios, react-icons
+- GREEN-API HTTP API
+- Optional webhook relay: Node.js, Express, socket.io
 
-### 🔹 Интерфейс чата
-![Интерфейс чата](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat0.png)
+## Getting started
 
-### 🔹 Создание нового чата
-![Создание чата](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat5.png)
+Requirements: Node.js 18+ and a GREEN-API instance that is linked to a WhatsApp account (status "authorized").
 
+```bash
+git clone https://github.com/Alex03issa/whatsapp-chat.git
+cd whatsapp-chat
+npm install
+npm start
+```
 
+Open http://localhost:3000 and log in with your instance's `idInstance` and `apiTokenInstance` from the GREEN-API console.
 
-- **Отправка сообщений:** пользователи могут отправлять текстовые сообщения на указанный номер WhatsApp.
+Other scripts:
 
-### 🔹 Отправка сообщений
-![Получение сообщения](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat8.png)
+| Command | What it does |
+|---------|--------------|
+| `npm run build` | Production build in `build/` |
+| `npm test` | Unit tests |
+| `npm run server` | Optional webhook relay (see below) |
 
-- **Получение сообщений:** Входящие сообщения извлекаются с помощью метода опроса HTTP API.
+> The instance token is stored in this browser's `localStorage` and sent to GREEN-API in the request URL, which is how GREEN-API authenticates. Use it on your own machine only, and log out to remove it.
 
-### 🔹 Получение сообщения
+## How receiving messages works
 
-![Создание чата](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat1.png)
+GREEN-API keeps incoming events in a notification queue. The app reads it in one place:
 
+1. `useIncomingNotifications` (in `src/hooks/`) calls `ReceiveNotification` in a loop. The request waits up to a few seconds for a new event.
+2. Each notification is passed to `Home`, which updates the chat list (preview, unread counter, order) and forwards the message to the open `ChatWindow` if it belongs to that chat.
+3. The notification is then removed with `DeleteNotification` so the next one can be received.
 
-- **Удаление уведомлений:** После обработки сообщения уведомления удаляются, чтобы позволить приходить новым.
+The loop is stopped with an `AbortController` when you log out or the page is closed, and it backs off for 5 s after an error.
 
-- **Извлечение контактной информации:** Извлекает **имя чата** и **аватар** вместо отображения только идентификаторов чата.
+### Optional: webhook relay
 
-### 🔹 Отображение контактной информации
-![Контактная информация](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat4.jpg)
+Instead of polling, GREEN-API can POST notifications to a webhook. `server.js` receives them on `POST /webhook` and pushes them to the app over socket.io.
 
-### 🔹 Типы сообщений (текст, изображения, аудио)
-![Типы сообщений](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat3.jpg)
+```bash
+npm run server                                   # relay on http://localhost:5000
+REACT_APP_WEBHOOK_SOCKET_URL=http://localhost:5000 npm start
+```
 
-## Используемые технологии
+GREEN-API must be able to reach the relay, so expose it publicly (for example with a tunnel) and set `https://<your-host>/webhook` as the webhook URL in the instance settings. Server settings: `PORT` (default 5000), `CLIENT_ORIGIN` (default `http://localhost:3000`) and `WEBHOOK_TOKEN` (if set, the request must send it in the `Authorization` header; set the same value as the webhook token in GREEN-API).
 
-- **React.js** (Frontend)
-- **Node.js и Express** (Backend для вызовов API)
-- **CSS** (Стилизация)
-- **GREEN-API** (служба API WhatsApp)
+## GREEN-API methods used
 
-## Структура проекта
+| Method | Used for |
+|--------|----------|
+| `getStateInstance` | Login check and before sending |
+| `getChats` | Chat list |
+| `getChatHistory` | Message history |
+| `getContactInfo` | Contact name and avatar |
+| `sendMessage` | Sending text messages |
+| `ReceiveNotification` / `DeleteNotification` | Live incoming and outgoing messages |
+
+All calls are in `src/services/api.js`.
+
+## Project structure
 
 ```
 whatsapp-chat/
-│── public/ # Статические ресурсы (изображения, иконки)
-│── src/
-│ ├── components/ # Компоненты пользовательского интерфейса
-│ │ ├── ChatWindow.js
-│ │ ├── ChatWindow.css
-│ │ ├── MessageList.js
-│ │ ├── MessageList.css
-│ │ ├── MessageInput.js
-│ │ ├── MessageInput.css
-│ │ ├── LoginForm.js
-│ │ ├── LoginForm.css
-│ ├── pages/ # Главные страницы приложения
-│ │ ├── Home.js
-│ │ ├── Home.css
-│ │ ├── Login.js
-│ ├── services/ # Функции сервиса API
-│ │ ├── api.js
-│ ├── App.js # Главный компонент React
-│ ├── index.js # Точка входа
-│ ├── index.css # Глобальные стили
-│── server.js # Внутренний сервер для прокси API
-│── package.json # Зависимости и скрипты
-│── README.md # Документация проекта
+├── docs/screenshots/        README images
+├── public/                  index.html, manifest, chat backgrounds
+├── server.js                optional webhook relay (Express + socket.io)
+└── src/
+    ├── components/          ChatWindow, MessageList, MessageInput, LoginForm
+    ├── hooks/               useIncomingNotifications (single notification loop)
+    ├── pages/               Home (chat list + window), Login
+    ├── services/            api.js (GREEN-API calls), notifications.js (+ tests)
+    └── App.js               routes and stored credentials
 ```
 
-## Настройка и установка
+## Troubleshooting
 
-### Предварительные условия
+- **Login fails**: check that the instance is authorized in the GREEN-API console and that the id and token are correct.
+- **No new messages**: only one consumer can read an instance's notification queue. If a webhook URL is set in the instance settings, notifications go there instead of `ReceiveNotification`; either clear it or run the webhook relay.
 
-- **Node.js** (рекомендуется v14+)
-- **npm или yarn**
-- **Учетная запись GREEN-API**
+## Author
 
-### Шаги для запуска проекта
-
-1. Клонируйте репозиторий:
-```bash
-git clone https://github.com/your-repo/whatsapp-chat.git
-cd whatsapp-chat
-```
-2. Установите зависимости:
-```bash
-npm install
-```
-3. Запустите сервер разработки:
-```bash
-npm start
-```
-4. Откройте приложение в браузере по адресу:
-```
-http://localhost:3000
-```
-5. Войдите, используя **idInstance** и **apiTokenInstance** GREEN-API.
-
-6. Начните новый чат, введя номер WhatsApp.
-
-7. Отправляйте и получайте сообщения в режиме реального времени.
-
-## Интеграция API
-
-### Отправка сообщений
-
-Использует `https://api.green-api.com/waInstance{idInstance}/SendMessage/{apiTokenInstance}`
-
-- Реализовано в `sendMessage()` внутри `api.js`
-- Отправляет сообщение на указанный номер WhatsApp.
-
-
-### Получение сообщений (используя HTTP API)
-
-Использует `https://api.green-api.com/waInstance{idInstance}/ReceiveNotification/{apiTokenInstance}`
-
-- Реализовано в `receiveMessages()` внутри `api.js`
-- Использует HTTP для проверки новых сообщений.
-- Получает уведомления и фильтрует сообщения только для активных чатов.
-- Обрабатывает сообщения и удаляет уведомления после извлечения с помощью `deleteNotification()`.
-
-### Удаление уведомлений
-
-Использует `https://api.green-api.com/waInstance{idInstance}/DeleteNotification/{receiptId}/{apiTokenInstance}`
-
-- Реализовано в `deleteNotification()` внутри `api.js`
-- Обеспечивает извлечение только новых сообщений путем удаления обработанных уведомлений.
-
-### Извлечение истории чата
-
-Использует `https://api.green-api.com/waInstance{idInstance}/getChatHistory/{apiTokenInstance}`
-
-- Реализовано в `getChatHistory()` внутри `api.js`
-- Извлекает прошлые сообщения для чата.
-
-### Извлечение списка чатов
-
-Использует `https://api.green-api.com/waInstance{idInstance}/getChats/{apiTokenInstance}`
-
-- Реализовано в `getChats()` внутри `api.js`
-- Перечисляет все активные разговоры.
-
-### Извлечение контактной информации
-
-Использует `https://api.green-api.com/waInstance{idInstance}/getContactInfo/{apiTokenInstance}`
-
-- Реализовано в `getContactInfo()` внутри `api.js`
-- Извлекает **имя чата** и **аватар** для заданного идентификатора чата.
-
-### Извлечение состояния экземпляра
-
-Использует `https://api.green-api.com/waInstance{idInstance}/getStateInstance/{apiTokenInstance}`
-
-- Реализовано в `getInstanceState()` внутри `api.js`
-- Проверяет состояние подключения экземпляра WhatsApp.
-
-## Webhook против HTTP API Polling
-
-### Webhook (не используется но есть в коде как комментарии в chatwindow.js) 
-
-- Прослушивает новые сообщения **автоматически**.
-- Требует **сервера, работающего 24/7**, для обработки входящих данных.
-- Более **эффективно**, но требует дополнительной настройки.
-- Webhook автоматически отправляет входящие сообщения на сервер, как только они получены.
-- Требует постоянно работающего сервера, который сможет обрабатывать входящие запросы.
-- В проекте реализовано в server.js, где входящие сообщения передаются в WebSocket.
-- Настройка Webhook осуществляется в Instance Settings GREEN-API, где указывается URL сервера.
-  
-  ![CMD](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat10.png)
-  
-  ![Webhook](https://raw.githubusercontent.com/Alex03issa/whatsapp-chat/main/public/assets/whatsapp_chat9.jpg)
-  
-### HTTP API Polling (используется в этом проекте)
-
-- Периодически **запрашивает** новые сообщения.
-- Работает в **браузере** без необходимости в сервере.
-- Проще, но требует **ручного опроса**.  
-
-## Проблемы и отладка
-
-- Если сообщения не получены, убедитесь, что **GREEN-API credentials** действительны.
-- Если приложение не отображает сообщения, проверьте **формат ответа API**.
-- Убедитесь, что для вызовов API используются правильные **идентификатор экземпляра и токен**.
-
-## Автор
-
-- **Alwxander Issa**
-- Электронная почта: **[alexander.issa@gmail.com](mailto\:alexander.issa@gmail.com)**
+Alexander Issa
